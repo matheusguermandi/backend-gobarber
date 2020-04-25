@@ -7,16 +7,15 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-
-// import User from './Users';
+import User from './Users';
 
 @Entity('appointments')
 class Appointment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  /* @ManyToOne(() => User)
-  @JoinColumn({ name: 'provider_id' }) */
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'provider_id' })
   provider: User;
 
   @Column()
