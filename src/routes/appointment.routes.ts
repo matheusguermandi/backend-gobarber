@@ -9,14 +9,12 @@ const appointmentRepository = new AppointmentsRepository();
 
 appointmentsRouter.get('/', (request, response) => {
   const appointments = appointmentRepository.all();
-
   return response.json(appointments);
 });
 
 appointmentsRouter.post('/', (request, response) => {
   try {
     const { provider, date } = request.body;
-
     const parsedDate = parseISO(date);
 
     const createAppointment = new CreateAppointmentService(
