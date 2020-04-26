@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+
+import Appointment from './Appointment';
 
 @Entity('users')
 class User {
@@ -22,6 +25,9 @@ class User {
 
   @Column()
   avatar: string;
+
+  @OneToMany(() => Appointment, appointment => appointment.provider)
+  appointment: Appointment;
 
   @CreateDateColumn()
   created_at: Date;
