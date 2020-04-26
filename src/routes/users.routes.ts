@@ -1,22 +1,19 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 
-// import usersRepository from '../repositories/usersRepository';
-// import CreateuserService from '../services/CreateuserService';
+import CreateUserService from '../services/CreateUserService';
 
 const usersRouter = Router();
-
-usersRouter.get('/', async (request, response) => {
-  // const userRepository = getCustomRepository(usersRepository);
-  // const users = await userRepository.find();
-  return response.json('users');
-});
 
 usersRouter.post('/', async (request, response) => {
   try {
     const { name, email, password } = request.body;
 
-    return response.json('');
+    const userService = new CreateUserService();
+
+    const user = await userService.execute({ name, email, password });
+
+    return response.send(user);
   } catch (err) {
     return response.status(400).json({ erro: err.message });
   }

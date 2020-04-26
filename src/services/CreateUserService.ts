@@ -1,31 +1,38 @@
-import { getCustomRepository } from 'typeorm';
+import { getRepository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import User from '../models/User';
-import UsersRepository from '../repositories/UsersRepository';
 
 interface Request {
   name: string;
   email: string;
-  senha: string;
+  password: string;
 }
 
 class CreateUserService {
-  public async execute({ name, email, senha }: Request): Promise<User> {
-    const userRepository = getCustomRepository(UsersRepository);
+  public async execute({ name, email, password }: Request): Promise<User> {
+    const usersRepository = getRepository(User);
 
-    /* if ( {
-      throw Error('');
-    }
-
-    const user = userRepository.create({
-      name,
-      email,
-      senha,
+    const checkEmailExists = await usersRepository.findOne({
+      where: { email },
     });
 
-    await userRepository.save(user);
+    if (checkEmailExists) {
+      throw new Error('Email address already used.');
+    }
+
+    const hashedPassword = await hash(password, 8);
+
+    const user = usersRepository.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    await usersRepository.save(user);
+
+    delete user.password;
 
     return user;
-    */
   }
 }
 
