@@ -14,6 +14,8 @@ usersRouter.get('/', async (request, response) => {
 
 usersRouter.post('/', async (request, response) => {
   try {
+    const { name, email, password } = request.body;
+
     return response.json('');
   } catch (err) {
     return response.status(400).json({ erro: err.message });
