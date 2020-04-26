@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
-
 import CreateUserService from '../services/CreateUserService';
 
 const usersRouter = Router();
@@ -10,7 +8,6 @@ usersRouter.post('/', async (request, response) => {
     const { name, email, password } = request.body;
 
     const userService = new CreateUserService();
-
     const user = await userService.execute({ name, email, password });
 
     return response.send(user);
