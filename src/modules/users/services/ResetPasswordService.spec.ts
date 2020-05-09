@@ -1,5 +1,6 @@
 // import AppError from '@shared/errors/AppError';
 
+import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
@@ -11,7 +12,7 @@ let fakeUserTokensRepository: FakeUserTokensRepository;
 let resetPassword: ResetPasswordService;
 let fakeHashProvider: FakeHashProvider;
 
-describe('SendForgotPasswordEmail', () => {
+describe('ResetPassword', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeUserTokensRepository = new FakeUserTokensRepository();
@@ -44,5 +45,14 @@ describe('SendForgotPasswordEmail', () => {
 
     expect(generateHash).toHaveBeenCalledWith('123123');
     expect(updateUser?.password).toBe('123123');
+  });
+
+  it('should not be able to reset the password with non-existing token', async () => {
+    await expect(
+      resetPassword.execute({
+        token: 'non-existing-token',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
