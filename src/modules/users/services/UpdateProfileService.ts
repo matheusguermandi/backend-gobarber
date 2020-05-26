@@ -24,7 +24,13 @@ class UpdateProfileService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ user_id, email, name }: IRequest): Promise<User> {
+  public async execute({
+    user_id,
+    email,
+    name,
+    password,
+    old_password,
+  }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -39,6 +45,10 @@ class UpdateProfileService {
 
     user.name = name;
     user.email = email;
+
+    if (password) {
+      user.password = await this.hashProvider.generateHash(password);
+    }
 
     return this.usersRepository.save(user);
   }
