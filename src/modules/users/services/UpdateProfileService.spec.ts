@@ -93,4 +93,22 @@ describe('UpdateProfile', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to update the password with wrong old password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Matheus01',
+      email: 'matheus_guermandi@hotmail.com',
+      password: '123',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        user_id: user.id,
+        name: 'Matheus02',
+        email: 'matheusguermand@gmail.com',
+        old_password: 'abc123',
+        password: '123123',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
