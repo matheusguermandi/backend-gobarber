@@ -20,5 +20,20 @@ describe('UpdateProfile', () => {
     );
   });
 
-  it('', async () => {});
+  it('should be able to update the user profile', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Matheus01',
+      email: 'matheus_guermandi@hotmail.com',
+      password: '123',
+    });
+
+    const updateUser = await updateProfileService.execute({
+      user_id: user.id,
+      name: 'Matheus02',
+      email: 'matheusguermand@gmail.com',
+    });
+
+    expect(updateUser.name).toBe('Matheus02');
+    expect(updateUser.email).toBe('matheusguermand@gmail.com');
+  });
 });

@@ -1,8 +1,8 @@
 import { injectable, inject } from 'tsyringe';
 
-// import AppError from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
 
-// import User from '@modules/users/infra/typeorm/entities/User';
+import User from '@modules/users/infra/typeorm/entities/User';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 
@@ -24,7 +24,15 @@ class UpdateProfileService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ user_id, email, name }: IRequest): Promise<void> {}
+  public async execute({ user_id, email, name }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(user_id);
+
+    if (!user) {
+      throw new AppError('Not found');
+    }
+
+    return user;
+  }
 }
 
 export default UpdateProfileService;
