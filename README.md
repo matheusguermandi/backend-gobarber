@@ -1,6 +1,4 @@
-# backend-gobarber
-💈 Backend da aplicação GoBarber 💈 BOOTCAMP GOSTACK 11.0 🚀
-
+# 💈 Backend da aplicação GoBarber 💈 
 
 ## 🚀 Como rodar a aplicação
 
