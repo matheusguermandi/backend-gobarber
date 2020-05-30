@@ -1,5 +1,3 @@
-import AppError from '@shared/errors/AppError';
-
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import ListProvidersService from './ListProvidersService';
 
@@ -36,6 +34,6 @@ describe('ListProviders', () => {
       user_id: loggedUser.id,
     });
 
-    expect(providers).toBe([user01, user02]);
+    expect(providers).toEqual([user01, user02]);
   });
 });
