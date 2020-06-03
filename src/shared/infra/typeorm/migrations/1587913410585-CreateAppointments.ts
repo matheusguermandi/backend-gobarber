@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateAppointments1586877037996
+export default class CreateAppointments1587913410585
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -21,6 +21,10 @@ export default class CreateAppointments1586877037996
           },
           {
             name: 'provider_id',
+            type: 'varchar',
+          },
+          {
+            name: 'user_id',
             type: 'varchar',
           },
           {
@@ -52,10 +56,23 @@ export default class CreateAppointments1586877037996
         onUpdate: 'CASCADE',
       }),
     );
+
+    await queryRunner.createForeignKey(
+      'appointments',
+      new TableForeignKey({
+        name: 'AppointmentUserFK',
+        columnNames: ['user_id'],
+        referencedTableName: 'users',
+        referencedColumnNames: ['id'],
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('appointments');
     await queryRunner.dropForeignKey('appointments', 'AppointmentProviderFK');
+    await queryRunner.dropForeignKey('appointments', 'AppointmentUserFK');
   }
 }
