@@ -34,6 +34,10 @@ class CreateAppointmentService {
       appointmentDate,
     );
 
+    if (user_id === provider_id) {
+      throw new AppError("You can't create an appointment with yourself");
+    }
+
     if (findAppointmentInSameDate) {
       throw new AppError('This appontment is already booked');
     }
