@@ -1,4 +1,4 @@
-import nodemailer, { Transporter } from 'nodemailer';
+// import nodemailer, { Transporter } from 'nodemailer';
 import { injectable, inject } from 'tsyringe';
 
 import IMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/IMailTemplateProvider';
@@ -8,7 +8,7 @@ import ISendEmailDTO from '../dtos/ISendEmailDTO';
 
 @injectable()
 export default class SESMailProvider implements IMailProvider {
-  private client: Transporter;
+  // private client: Transporter;
 
   constructor(
     @inject('MailTemplateProvider')
