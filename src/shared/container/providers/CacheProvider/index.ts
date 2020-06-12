@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
 
-// import cache from '@config/cache';
+import cacheConfig from '@config/cache';
 
 import ICacheProvider from './models/ICacheProvider';
 
@@ -10,4 +10,7 @@ const provider = {
   redis: RedisCacheProvider,
 };
 
-container.registerSingleton<ICacheProvider>('CacheProvider', provider.redis);
+container.registerSingleton<ICacheProvider>(
+  'CacheProvider',
+  provider[cacheConfig.driver],
+);
