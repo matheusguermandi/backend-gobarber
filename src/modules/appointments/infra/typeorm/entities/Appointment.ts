@@ -15,22 +15,22 @@ class Appointment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  provider_id: string;
+  @Column('time with time zone')
+  date: Date;
 
-  @ManyToOne(() => User, user => user.appointment, { eager: true })
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'provider_id' })
   provider: User;
 
   @Column()
-  user_id: string;
+  provider_id: string;
 
-  @ManyToOne(() => User, user => user.appointment, { eager: true })
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column('time with time zone')
-  date: Date;
+  @Column()
+  user_id: string;
 
   @CreateDateColumn()
   created_at: Date;
