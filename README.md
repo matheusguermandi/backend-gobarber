@@ -16,4 +16,4 @@
 
 > [![Author](https://img.shields.io/badge/author-MatheusGuermandi-1E78F6?style=flat-square)](https://github.com/matheusguermandi)
 
-> [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Bootcampo%20GoStack&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fmatheusguermandi%2Fbackend-gobarber%2Fmaster%2Fexport_insomnia.json%3Ftoken%3DAGUMDXLAMTRZU44QLTMPBDK637EBA)
+> [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=GoBarber%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fmatheusguermandi%2Fbackend-gobarber%2Fmaster%2Fexport_insomnia.json%3Ftoken%3DAGUMDXIBG5H2SGIVHDQGT5S67DYR4)
